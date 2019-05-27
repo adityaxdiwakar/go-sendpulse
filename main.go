@@ -13,13 +13,13 @@ var grantType string
 var clientID string
 var clientSecret string
 var accessToken string
-var fromContact recipient
+var fromContact Recipient
 
-func initialize(rClientID string, rClientSecret string, rName string, rFromEmail string) {
+func Initialize(rClientID string, rClientSecret string, rName string, rFromEmail string) {
 	grantType = "client_credentials"
 	clientID = rClientID
 	clientSecret = rClientSecret
-	fromContact = recipient{
+	fromContact = Recipient{
 		Name: rName,
 		Email: rFromEmail,
 	}
@@ -62,7 +62,7 @@ func getKey() (string, error) {
 	return response.AccessToken, nil
 }
 
-func SendEmail(html []byte, text []byte, subject string, to []recipient) error {
+func SendEmail(html []byte, text []byte, subject string, to []Recipient) error {
 	encoded := base64.StdEncoding.EncodeToString(html)
 	mailObj := emailArray{
 		email{

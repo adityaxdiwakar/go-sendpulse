@@ -9,7 +9,7 @@ type emailArray struct {
 	Content email `json:"email"`
 }
 
-type recipient struct {
+type Recipient struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
