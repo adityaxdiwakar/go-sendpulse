@@ -109,7 +109,7 @@ func main() {
 
 ## Support
 
-If you need help, feel free to open a GitHub issue or email ``aditya@netvpx.com`` who Head of R&D at NetVPX.
+If you need help, feel free to open a GitHub issue or email ``aditya@netvpx.com`` who is the Head of R&D at NetVPX.
 
 ## Contributing
 
