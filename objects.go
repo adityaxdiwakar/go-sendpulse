@@ -18,8 +18,8 @@ type email struct {
 	HTML    string 		`json:"html"`
 	Text    string    	`json:"text"`
 	Subject string      `json:"subject"`
-	From    recipient   `json:"from"`
-	To      []recipient `json:"to"`
+	From    Recipient   `json:"from"`
+	To      []Recipient `json:"to"`
 }
 
 type sendEmailResponse struct {
