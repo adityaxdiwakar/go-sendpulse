@@ -28,7 +28,7 @@ In order to use this, you must provide the ``client_id``, ``client_secret``, ``c
 
 Set it up like so:
 ```go
-Initialize(
+sendpulse.Initialize(
     CLIENT_ID,
     CLIENT_SECRET,
     CLIENT_NAME,
@@ -94,7 +94,12 @@ func main() {
     }
     subject := "Hey There"
 
-    sendpulse.Initialize()
+    sendpulse.Initialize(
+        CLIENT_ID,
+        CLIENT_SECRET,
+        CLIENT_NAME,
+        CLIENT_EMAIL,
+    )   
     err := sendpulse.SendEmail(
         html,
         text,
