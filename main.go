@@ -53,7 +53,7 @@ func getKey() (string, error) {
 
 	var response oauthTokenResponse
 	err = json.Unmarshal([]byte(body), &response)
-
+	
 	if response.ErrorCode != 0 {
 		return "", errors.New("SendPulse sent an error.")
 	}
@@ -89,8 +89,10 @@ func SendEmail(html []byte, text []byte, subject string, to []Recipient) error {
 		return errors.New("Something wrong with string -> request")
 	}
 
+	token, err := getKey()
+
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer " + accessToken)
+	req.Header.Set("Authorization", "Bearer " + token)
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
