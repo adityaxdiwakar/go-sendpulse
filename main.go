@@ -1,4 +1,4 @@
-package sendpulse
+package main
 
 import (
 	"encoding/json"
@@ -13,11 +13,6 @@ var clientID string
 var clientSecret string
 var accessToken string
 
-
-type oauthTokenResponse struct {
-	AccessToken string `json:"access_token"`
-	ErrorCode   int	   `json:"error_code"`
-}
 
 func initialize(rClientID string, rClientSecret string) {
 	grantType = "client_credentials"
@@ -62,3 +57,4 @@ func getKey() (string, error) {
 	return response.AccessToken, nil
 }
 
+func main() {}
