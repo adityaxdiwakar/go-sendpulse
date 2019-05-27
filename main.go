@@ -1,7 +1,8 @@
-package main
+package sendpulse
 
 import (
 	"encoding/json"
+	"encoding/base64"
 	"net/http"
 	"io/ioutil"
 	"bytes"
@@ -12,12 +13,16 @@ var grantType string
 var clientID string
 var clientSecret string
 var accessToken string
+var fromContact recipient
 
-
-func initialize(rClientID string, rClientSecret string) {
+func initialize(rClientID string, rClientSecret string, rName string, rFromEmail string) {
 	grantType = "client_credentials"
 	clientID = rClientID
 	clientSecret = rClientSecret
+	fromContact = recipient{
+		Name: rName,
+		Email: rFromEmail,
+	}
 }
 
 func getKey() (string, error) {
@@ -57,4 +62,53 @@ func getKey() (string, error) {
 	return response.AccessToken, nil
 }
 
-func main() {}
+func SendEmail(html []byte, text []byte, subject string, to []recipient) error {
+	encoded := base64.StdEncoding.EncodeToString(html)
+	mailObj := emailArray{
+		email{
+			HTML: encoded,
+			Text: string(text),
+			Subject: subject,
+			From: fromContact,
+			To: to,
+		},
+	}
+	
+	mailByteSlice, err := json.Marshal(mailObj)
+	if err != nil {
+		return errors.New("Something wrong with email object -> string")
+	}
+
+	req, err := http.NewRequest(
+		"POST",
+		"https://api.sendpulse.com/smtp/emails", 
+		bytes.NewBuffer([]byte(mailByteSlice)),
+	)
+	
+	if err != nil {
+		return errors.New("Something wrong with string -> request")
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer " + accessToken)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return errors.New("Something wrong sending the email")
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+
+	var emailResponse sendEmailResponse
+	err = json.Unmarshal([]byte(body), &emailResponse)
+	if err != nil {
+		return errors.New("Repopulation issue")
+	}
+
+	if !emailResponse.Result {
+		return errors.New("Something went wrong at SendPulse")
+	}
+	
+	return nil
+}
