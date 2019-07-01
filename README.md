@@ -7,12 +7,12 @@ This was written open sourced by the [NetVPX](https://netvpx.com) DevOps team fo
 
 To use this library, simply install it using:
 ```
-go get github.com/netvpx/go-sendpulse
+go get github.com/adityaxdiwakar/go-sendpulse
 ```
 
 If you want to set it up as a submodule, use:
 ```
-git submodule add https://github.com/netvpx/go-sendpulse github.com/netvpx/go-sendpulse
+git submodule add https://github.com/adityaxdiwakar/go-sendpulse github.com/adityaxdiwakar/go-sendpulse
 ```
 
 ## Usage
@@ -80,7 +80,7 @@ The above endpoint can be hit like so... which will send an email with a subject
 package main
 
 import (
-    "github.com/netvpx/go-sendpulse"
+    "github.com/adityaxdiwakar/go-sendpulse"
     "log"
 )
 
