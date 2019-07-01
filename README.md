@@ -1,7 +1,8 @@
 # go-sendpulse
 A very small and basic SendPulse SMTP API client library written in Golang
 
-This was written open sourced by the [NetVPX](https://netvpx.com) DevOps team for internal usage. This library is maintained by the team for the public.
+This was written open sourced by the [NetVPX](https://netvpx.com) DevOps team for internal usage. This library is now maintained by Aditya Diwakar, not affiliated with NetVPX.
+
 ## Install
 
 To use this library, simply install it using:
